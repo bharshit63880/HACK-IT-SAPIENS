@@ -15,11 +15,11 @@ const userSchema = mongoose.Schema(
             type: Number,
             default: 0
         },
-        articlesPublished: [
-            {
-                type: String,
-            }
-        ],
+        articlesPublished: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "ARTICLE",
+            required: true,
+        }],
         medicalHistory: [
             {
                 type: String,

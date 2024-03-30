@@ -26,6 +26,7 @@ const registerController = async (req, res) => {
                     success: true,
                     message: "User is already registered....",
                     user: {
+                        id: existingUser._id,
                         name: existingUser.name,
                         phone: existingUser.phone,
                         role: existingUser.role,
@@ -46,6 +47,7 @@ const registerController = async (req, res) => {
                 success: true,
                 message: "User registered successfully....",
                 user: {
+                    id: user._id,
                     name: user.name,
                     phone: user.phone,
                     role: user.role,
@@ -101,6 +103,7 @@ const loginController = async (req, res) => {
                 success: true,
                 message: "Logged in Successfully....",
                 user: {
+                    id: user._id,
                     name: user.name,
                     phone: user.phone,
                     role: user.role,

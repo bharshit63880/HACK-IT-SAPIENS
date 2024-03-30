@@ -4,6 +4,7 @@ import cors from "cors";
 
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
+import articleRoutes from "./routes/articleRoutes.js";
 
 const app = express();
 
@@ -25,6 +26,9 @@ app.use((req, res, next) => {
 
 // To access authorisation related routes
 app.use("/api/v1/auth",authRoutes);
+
+// To access article related routes
+app.use("/api/v1/article",articleRoutes);
 
 // Connecting to MongoDB -----------------------
 connectDB();
