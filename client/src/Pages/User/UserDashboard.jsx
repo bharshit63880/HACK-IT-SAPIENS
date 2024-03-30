@@ -1,14 +1,16 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+import UserPageSideBar from "./UserPageSideBar";
 
 const UserDashboard = () => {
+    const { userId } = useParams();
     return <>
-        <Layout>
+        <div className="d-flex flex-row">
+            <UserPageSideBar userId={userId} />
             <div className="container">
-                <h1>
-                    This is User dashboard.
-                </h1>
+                <h2>Welcome to the User dashboard page....</h2>
             </div>
-        </Layout>
+        </div>
     </>;
 };
 

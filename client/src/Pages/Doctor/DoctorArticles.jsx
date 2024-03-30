@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import DoctorPageSideBar from "./DoctorPageSideBar";
 import { toast } from "react-toastify";
 import axios from "axios";
 
 const DoctorArticles = () => {
+    const navigate = useNavigate();
+
     const { doctorId } = useParams();
     const serverURI = import.meta.env.VITE_SERVER_URI;
 
@@ -20,6 +22,10 @@ const DoctorArticles = () => {
                 setArticles(response.data.articles);
                 toast.success("Got articles....");
             }
+            else{
+                toast.error(response.data.message);
+                setArticles([]);
+            }
 
         } catch (error) {
             setArticles([]);
@@ -32,8 +38,31 @@ const DoctorArticles = () => {
         getArticlesOfDoctor();
     }, []);
 
-    const handleCreateButtonClick = async () => {
+    const handleCreateButtonClick = () => {
+        navigate(`/create-article/${doctorId}`);
+    };
 
+    const handleDeleteButtonClick = async (id) => {
+        try {
+            const response = await axios.delete(`${serverURI}/api/v1/article/delete-article/${id}`);
+            if (response.data.success) {
+                console.log("The response we got from the api....");
+                toast.success("Deleted successfully....");
+                setArticles(articles.filter(article => article._id !== id));
+            } else {
+                toast.error(response.data.message);
+            }
+
+        } catch (error) {
+            setArticles([]);
+            toast.error("Error in loading articles");
+            console.log(error);
+        }
+    };
+
+    const handleEditButtonClick = (article) => {
+        console.log(article);
+        navigate(`/update-article/${article._id}/${article.title}/${article.content}`);
     };
 
     return <>
@@ -54,13 +83,19 @@ const DoctorArticles = () => {
                                 <div className="card">
                                     <div className="card-body">
                                         <h5 className="card-title">
-                                            <NavLink to={`/article/${article._id}`} className="text-decoration-none text-reset">
+                                            <Link to={`/article/${article._id}`} className="text-decoration-none text-reset">
                                                 {article.title}
-                                            </NavLink>
+                                            </Link>
                                         </h5>
                                         <p className="card-content">
                                             {article.content}
                                         </p>
+                                        <button className="btn btn-outline-primary m-1" onClick={() => {
+                                            handleEditButtonClick(article);
+                                        }}>Edit</button>
+                                        <button className="btn btn-outline-danger m-1" onClick={() =>{
+                                            handleDeleteButtonClick(article._id);
+                                        }}>Delete</button>
                                     </div>
                                 </div>
                             </div>

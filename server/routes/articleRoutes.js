@@ -28,14 +28,14 @@ articleRouter.get("/get-article-by-id/:doctorId", readArticlesByIdController);
 articleRouter.post("/create-article", createArticlesController);
 
 /**
- * @articleRouter /api/v1/article/update-article
+ * @articleRouter /api/v1/article/update-article/:id
  * @description Update articles
  * @access public
  */
 articleRouter.put("/update-article/:id", updateArticlesController);
 
 /**
- * @articleRouter /api/v1/article/delete-article
+ * @articleRouter /api/v1/article/delete-article/:id
  * @description Delete articles
  * @access public
  */
