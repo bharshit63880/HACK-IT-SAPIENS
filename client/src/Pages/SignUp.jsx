@@ -32,7 +32,7 @@ const SignUp = () => {
 
                 toast.success("Congrats!! You are Logged in now....");
                 setTimeout(() => {
-                    navigate(response.data.user.role === 1 ? "/doctorDashboard" : "userDashboard");
+                    navigate(response.data.user.role === 1 ? `/doctorDashboard/${response.data.user.id}` : `/userDashboard/${response.data.user.id}`);
                 }, 2000);
             }
             else {

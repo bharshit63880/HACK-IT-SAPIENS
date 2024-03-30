@@ -24,6 +24,27 @@ const readArticlesController = async (req, res) => {
     }
 };
 
+const readArticlesByIdController = async (req, res) => {
+    
+    try {
+        const articles = await Article.find({author: req.params.doctorId}).populate("author");
+        return res.status(200).json({
+            success: true,
+            message: "Successfully got the articles....",
+            articles: articles
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json(
+            {
+                success: false,
+                message: "Error getting articles....",
+                error
+            }
+        )
+    }
+};
+
 const createArticlesController = async (req, res) => {
     try {
         // Extracting information from req.body
@@ -106,4 +127,4 @@ const deleteArticlesController = async (req, res) => {
 
 
 
-export { readArticlesController, createArticlesController, updateArticlesController, deleteArticlesController };
+export { readArticlesController,readArticlesByIdController, createArticlesController, updateArticlesController, deleteArticlesController };

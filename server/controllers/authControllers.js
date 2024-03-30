@@ -84,10 +84,10 @@ const loginController = async (req, res) => {
             );
         }
 
-        // Finding User having the given email
+        // Finding User having the given phone
         const user = await User.findOne({ phone });
 
-        // If user is not found with the given email then return
+        // If user is not found with the given phone then return
         if (!user) {
             return res.status(200).json(
                 {
@@ -97,7 +97,6 @@ const loginController = async (req, res) => {
             );
         }
 
-        // Passing Token to the client
         return res.status(200).json(
             {
                 success: true,

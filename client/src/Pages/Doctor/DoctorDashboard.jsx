@@ -1,15 +1,16 @@
 import React from "react";
-import Layout from "../../components/Layout/Layout";
+import { Link, useParams } from "react-router-dom";
+import DoctorPageSideBar from "./DoctorPageSideBar";
 
 const DoctorDashboard = () => {
+    const { doctorId } = useParams();
     return <>
-        <Layout>
+        <div className="d-flex flex-row">
+            <DoctorPageSideBar doctorId={doctorId} />
             <div className="container">
-                <h1>
-                    This is DOctor dashboard.
-                </h1>
+                <h2>Welcome to the Doctor dashboard page....</h2>
             </div>
-        </Layout>
+        </div>
     </>;
 };
 
